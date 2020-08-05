@@ -1,70 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'ColorExtensions.dart';
+import 'SplashScreen.dart';
 
 void main() {
   runApp(SplashScreen());
-}
-
-class SplashScreen extends StatelessWidget {
-  final gradientTopColor = HexColor.fromHex("#712E98");
-  final gradientBottomColor = HexColor.fromHex("#52A7EA");
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-              colors: [gradientTopColor, gradientBottomColor],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              getTextView("Pocket Guard", 32),
-              getMiddleImage(),
-              getTextView("Manage your personal expenses", 24),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget getMiddleImage() {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(24, 42, 24, 12),
-      child: Stack(
-        alignment: Alignment.center,
-        children: <Widget>[
-          CircleAvatar(
-            radius: 80,
-            backgroundColor: Colors.white,
-          ),
-          Icon(
-            Icons.cake,
-            size: 120,
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget getTextView(String text, double fontSize) {
-    return Text(
-      text,
-      style: TextStyle(
-          color: Colors.white,
-          decoration: TextDecoration.none,
-          fontSize: fontSize),
-      textAlign: TextAlign.center,
-      softWrap: true,
-    );
-  }
 }
 
 //class MyApp extends StatelessWidget {
