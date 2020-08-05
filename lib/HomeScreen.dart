@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pocket_guard/ActiveColors.dart';
+import 'package:pocket_guard/CalendarScreen.dart';
+import 'package:pocket_guard/SettingsScreen.dart';
+import 'package:pocket_guard/StatsScreen.dart';
+import 'package:pocket_guard/TransactionsScreen.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -17,11 +21,34 @@ class _HomeScreenChild extends StatefulWidget {
 
 class _HomeScreenState extends State<_HomeScreenChild> {
   int _selectedIndex = 0;
+  Widget _screenToShow = TransactionsScreen();
 
   void onNavigationItemClicked(int index) {
     setState(() {
       if (index != 2) {
         _selectedIndex = index;
+        switch (index) {
+          case 0:
+            {
+              _screenToShow = TransactionsScreen();
+              break;
+            }
+          case 1:
+            {
+              _screenToShow = CalendarScreen();
+              break;
+            }
+          case 3:
+            {
+              _screenToShow = StatsScreen();
+              break;
+            }
+          case 4:
+            {
+              _screenToShow = SettingsScreen();
+              break;
+            }
+        }
       }
     });
   }
@@ -29,6 +56,7 @@ class _HomeScreenState extends State<_HomeScreenChild> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: _screenToShow,
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
