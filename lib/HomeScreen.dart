@@ -57,26 +57,40 @@ class _HomeScreenState extends State<_HomeScreenChild> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _screenToShow,
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-              icon: Icon(Icons.home), title: Text("Expenses")),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_today), title: Text("Calendar")),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.add, size: 0), title: Text("")),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.assessment), title: Text("Stats")),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.settings), title: Text("Settings"))
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: ActiveColors["colorAccent"],
+        child: Icon(
+          Icons.add,
+          size: 24,
+        ),
+      ),
+      bottomNavigationBar: Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          BottomNavigationBar(
+            items: [
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.home), title: Text("Expenses")),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.calendar_today), title: Text("Calendar")),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.add, size: 0), title: Text("")),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.assessment), title: Text("Stats")),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.settings), title: Text("Settings"))
+            ],
+            currentIndex: _selectedIndex,
+            selectedItemColor: ActiveColors["colorPrimary"],
+            unselectedItemColor: ActiveColors["fontNormal"],
+            showUnselectedLabels: true,
+            iconSize: 24,
+            type: BottomNavigationBarType.fixed,
+            onTap: onNavigationItemClicked,
+          ),
         ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: ActiveColors["colorPrimary"],
-        unselectedItemColor: ActiveColors["fontNormal"],
-        showUnselectedLabels: true,
-        iconSize: 24,
-        type: BottomNavigationBarType.fixed,
-        onTap: onNavigationItemClicked,
       ),
     );
   }
