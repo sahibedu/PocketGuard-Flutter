@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pocket_guard/ActiveColors.dart';
-import 'package:pocket_guard/CalendarScreen.dart';
 import 'package:pocket_guard/SettingsScreen.dart';
 import 'package:pocket_guard/StatsScreen.dart';
 import 'package:pocket_guard/TransactionsScreen.dart';
+import 'package:pocket_guard/calendar/CalendarScreen.dart';
 
 class HomeScreen extends StatelessWidget {
   @override

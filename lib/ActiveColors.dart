@@ -12,4 +12,7 @@ const ColorSwatch ActiveColors = ColorSwatch(0x00000000, {
   "fontDark": Color(0xFF2F363F),
   "fontNormal": Color(0xFF535B62),
   "fontLight": Color(0xFF81878c),
+
+  /// Custom Colors
+  "calendarBackground": Color(0x20000000)
 });
