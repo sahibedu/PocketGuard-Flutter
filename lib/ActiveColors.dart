@@ -14,5 +14,6 @@ const ColorSwatch ActiveColors = ColorSwatch(0x00000000, {
   "fontLight": Color(0xFF81878c),
 
   /// Custom Colors
-  "calendarBackground": Color(0x20000000)
+  "calendarBackground": Color(0x20000000),
+  "textFieldBackground": Color(0x10000000)
 });

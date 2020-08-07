@@ -5,6 +5,8 @@ import 'package:pocket_guard/StatsScreen.dart';
 import 'package:pocket_guard/TransactionsScreen.dart';
 import 'package:pocket_guard/calendar/CalendarScreen.dart';
 
+import 'AddTransactionScreen.dart';
+
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -59,7 +61,12 @@ class _HomeScreenState extends State<_HomeScreenChild> {
       body: _screenToShow,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (BuildContext context) {
+            return AddTransactionScreen();
+          }));
+        },
         backgroundColor: ActiveColors["colorAccent"],
         child: Icon(
           Icons.add,
