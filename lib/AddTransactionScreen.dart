@@ -3,15 +3,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:pocket_guard/DateTimeFormats.dart';
 import 'package:pocket_guard/TextRadioGroup.dart';
+import 'package:pocket_guard/TransactionUiModel.dart';
 
 import 'ActiveColors.dart';
 
 class AddTransactionScreen extends StatelessWidget {
+  final int transactionId;
+
+  // todo CHANGE WITH PRESENTATION MODEL
+  TransactionUiModel _model;
+  final amountController = TextEditingController();
+  final titleController = TextEditingController();
+  final descriptionController = TextEditingController();
+
+  AddTransactionScreen(this.transactionId) {
+    if (transactionId != null) {
+      // todo fetch from db
+      _model = TransactionUiModel(2, "Item2", "category2", Icons.cake,
+          DateTime.now().subtract(Duration(days: 1)), -800);
+      amountController.text = _model.amount.toString();
+      titleController.text = _model.itemTitle;
+      descriptionController.text = "blabla demo";
+    } else
+      _model = null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Add Transaction"),
+          title: Text(
+              transactionId != null ? "Edit Transaction" : "Add Transaction"),
           backgroundColor: ActiveColors["colorPrimary"],
         ),
         body: SingleChildScrollView(
@@ -26,6 +48,7 @@ class AddTransactionScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         TextRadioGroup(
+                          //todo set selected id
                           [
                             Text(
                               "Income",
@@ -61,7 +84,9 @@ class AddTransactionScreen extends StatelessWidget {
                         GestureDetector(
                           child: Text(
                             DateTimeFormats.AddTransactionDateFormat.format(
-                                DateTime.now()),
+                                _model != null
+                                    ? (_model as TransactionUiModel).itemDate
+                                    : DateTime.now()),
                             style: TextStyle(fontSize: 16),
                           ),
                           onTap: () {
@@ -89,6 +114,7 @@ class AddTransactionScreen extends StatelessWidget {
                         Spacer(),
                         Expanded(
                           child: TextField(
+                            controller: amountController,
                             maxLines: 1,
                             maxLength: 9,
                             textAlign: TextAlign.end,
@@ -129,11 +155,11 @@ class AddTransactionScreen extends StatelessWidget {
                           },
                           // TODO Selected Value
                           hint: Text(
-                            "Item1",
+                            _model != null ? _model.categoryName : "Item1",
                             style: TextStyle(color: Colors.black),
                           ),
                           // TODO ITEMS
-                          items: ["Item1", "Item2"].map((String item) {
+                          items: ["category1", "category2"].map((String item) {
                             return DropdownMenuItem<String>(
                               value: item,
                               child: Row(
@@ -175,6 +201,7 @@ class AddTransactionScreen extends StatelessWidget {
                       children: <Widget>[
                         Expanded(
                           child: TextField(
+                            controller: titleController,
                             keyboardType: TextInputType.text,
                             decoration: InputDecoration(
                                 hintText: "Enter title (upto 25 characters)",
@@ -183,7 +210,7 @@ class AddTransactionScreen extends StatelessWidget {
                                 border: OutlineInputBorder(
                                     borderSide: BorderSide.none,
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(8)))),
+                                    BorderRadius.all(Radius.circular(8)))),
                           ),
                         )
                       ],
@@ -207,9 +234,10 @@ class AddTransactionScreen extends StatelessWidget {
                       children: <Widget>[
                         Expanded(
                           child: TextField(
+                            controller: descriptionController,
                             maxLines: 5,
                             minLines: 5,
-                            keyboardType: TextInputType.text,
+                            keyboardType: TextInputType.multiline,
                             decoration: InputDecoration(
                                 hintText: "Description (optional)",
                                 fillColor: ActiveColors["textFieldBackground"],
@@ -217,16 +245,72 @@ class AddTransactionScreen extends StatelessWidget {
                                 border: OutlineInputBorder(
                                     borderSide: BorderSide.none,
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(8)))),
+                                    BorderRadius.all(Radius.circular(8)))),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  _model != null
+                      ? Container(
+                    margin: EdgeInsets.only(top: 16),
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 45,
+                          width: double.infinity,
+                          child: OutlineButton(
+                            highlightElevation: 4,
+                            highlightedBorderColor:
+                            ActiveColors["colorPrimary"],
+                            highlightColor:
+                            ActiveColors["lightPrimaryColor"],
+                            borderSide: BorderSide(color: Colors.black),
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                new BorderRadius.circular(8)),
+                            onPressed: () {},
+                            child: Text(
+                              "Update",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: 16, bottom: 16),
+                          width: double.infinity,
+                          height: 45,
+                          child: OutlineButton(
+                            highlightElevation: 4,
+                            highlightedBorderColor:
+                            ActiveColors["colorPrimary"],
+                            highlightColor:
+                            ActiveColors["lightPrimaryColor"],
+                            borderSide: BorderSide(color: Colors.black),
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                new BorderRadius.circular(8)),
+                            onPressed: () {},
+                            child: Text(
+                              "Delete",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500),
+                            ),
                           ),
                         )
                       ],
                     ),
                   )
+                      : Container()
                 ],
               )),
         ),
-        floatingActionButton: FloatingActionButton(
+        floatingActionButton: _model != null
+            ? null
+            : FloatingActionButton(
           backgroundColor: ActiveColors["colorAccent"],
           onPressed: () {
             // TODO SAVE DATA TO DB

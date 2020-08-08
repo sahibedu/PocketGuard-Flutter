@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pocket_guard/ActiveColors.dart';
+import 'package:pocket_guard/EditTransactionScreen.dart';
 import 'package:pocket_guard/TransactionUiModel.dart';
 
 class TransactionItemWidget extends StatelessWidget {
@@ -12,7 +13,12 @@ class TransactionItemWidget extends StatelessWidget {
     return Material(
       color: ActiveColors,
       child: InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (BuildContext context) {
+              return EditTransactionScreen(model.transactionId);
+            }));
+          },
           child: Container(
             padding: EdgeInsets.all(16),
             child: Row(

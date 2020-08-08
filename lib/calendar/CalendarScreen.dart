@@ -2,19 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:pocket_guard/calendar/CalendarUiModel.dart';
 
 import '../ActiveColors.dart';
+import '../DummyData.dart';
 import '../TransactionItemWidget.dart';
-import '../TransactionUiModel.dart';
 
 class CalendarScreen extends StatelessWidget {
   final List _uiList = [
     /// Dummy Data
     CalendarUiModel(),
-    TransactionUiModel("Item1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", Icons.cake,
-        DateTime.now(), 800000),
-    TransactionUiModel("Item2", Icons.cake, DateTime.now(), -800),
-    TransactionUiModel("Item3", Icons.cake, DateTime.now(), 1200),
-    TransactionUiModel("Item4", Icons.cake, DateTime.now(), -8000),
   ];
+
+  CalendarScreen() {
+    _uiList.addAll(DummyData.uiTransactionList);
+  }
 
   @override
   Widget build(BuildContext context) {

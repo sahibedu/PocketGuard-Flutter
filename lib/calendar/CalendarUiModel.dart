@@ -24,7 +24,9 @@ class _CalendarWidgetState extends State<CalendarWidget> {
     return Container(
       color: ActiveColors["calendarBackground"],
       child: CalendarCarousel<Event>(
-        height: 420,
+        height: 350,
+        dayPadding: 0,
+        childAspectRatio: 1.5,
         onDayPressed: (DateTime dateTime, List<Event> event) {
           setState(() {
             _selectedDate = dateTime;
@@ -42,7 +44,6 @@ class _CalendarWidgetState extends State<CalendarWidget> {
             fontSize: 16,
             color: ActiveColors["fontDark"],
             fontWeight: FontWeight.bold),
-        dayPadding: 0,
         weekdayTextStyle:
             TextStyle(fontSize: 12, color: ActiveColors["fontLight"]),
         weekendTextStyle:

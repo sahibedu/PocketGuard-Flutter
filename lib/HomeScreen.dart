@@ -64,7 +64,7 @@ class _HomeScreenState extends State<_HomeScreenChild> {
         onPressed: () {
           Navigator.push(context,
               MaterialPageRoute(builder: (BuildContext context) {
-            return AddTransactionScreen();
+            return AddTransactionScreen(null);
           }));
         },
         backgroundColor: ActiveColors["colorAccent"],
