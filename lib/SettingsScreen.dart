@@ -10,7 +10,12 @@ class SettingsScreen extends StatelessWidget {
         title: Text("Settings"),
         backgroundColor: ActiveColors["colorPrimary"],
       ),
-      body: Center(child: Text("Settings Page")),
+      body: Center(
+          child: Text(
+        "Build with ♥️ from AppNikks",
+        style: TextStyle(
+            color: Colors.red, fontWeight: FontWeight.w500, fontSize: 16),
+      )),
     );
   }
 }

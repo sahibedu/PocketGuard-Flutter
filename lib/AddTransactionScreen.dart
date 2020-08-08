@@ -210,7 +210,7 @@ class AddTransactionScreen extends StatelessWidget {
                                 border: OutlineInputBorder(
                                     borderSide: BorderSide.none,
                                     borderRadius:
-                                    BorderRadius.all(Radius.circular(8)))),
+                                        BorderRadius.all(Radius.circular(8)))),
                           ),
                         )
                       ],
@@ -237,7 +237,12 @@ class AddTransactionScreen extends StatelessWidget {
                             controller: descriptionController,
                             maxLines: 5,
                             minLines: 5,
+                            maxLength: 255,
+                            onSubmitted: (String value) {
+                              FocusScope.of(context).unfocus();
+                            },
                             keyboardType: TextInputType.multiline,
+                            textInputAction: TextInputAction.done,
                             decoration: InputDecoration(
                                 hintText: "Description (optional)",
                                 fillColor: ActiveColors["textFieldBackground"],
